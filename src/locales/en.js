@@ -18,6 +18,7 @@ export default {
         authentication: {
             singin: "Singin",
             singup: "Singup",
+            singin_action: "Login",
             welcome: "Welcome <br> of the <br> Shadeless"
         }
     }

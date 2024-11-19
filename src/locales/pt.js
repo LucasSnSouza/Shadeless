@@ -17,6 +17,7 @@ export default {
         },
         authentication: {
             singin: "Entrada",
+            singin_action: "Entrar",
             singup: "Registra-se",
             welcome: "Bem vindo <br> de volta <br> ao Shadeless"
         }
