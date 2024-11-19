@@ -3,33 +3,49 @@
     <div class="startup-wrapper h-full p-xlg bg-color-brand-one">
 
         <div 
-            class="startup-upper-content flex flex-column x-end"
+            class="startup-upper-content h-full flex flex-column x-end"
         >
 
             <div 
-                class="upper-first-step flex flex-column gap-lg"
+                class="upper-first-step h-full flex flex-column gap-lg"
                 v-if="current_step == 0"
             >
-                <div class="first-step-language-choices flex gap-md">
-                    <ButtonBasic
-                        v-for="(item, index) of language_buttons_form"
-                        class="bg-color-brand-four rounded w-auto"
-                        :class="{
-                            'ghost color-brand-three': item?.selected}"
-                        :index="index"
-                        @click="$useLanguage(item?.abbreviation), selectAction(index)"
-                    >
-                        {{ item?.label }}
-                    </ButtonBasic>
+                <div class="first-step-language-choices h-full flex flex-column gap-md">
+
+                    <div class="step-sticker flex x-center y-center h-full y-start">
+                        <img
+                            class="rounded-lg" 
+                            src="/assets/images/image-translate-sticker.png"
+                        >
+                    </div>
+
+                    <div class="first-step-buttons flex gap-md">
+                        <ButtonBasic
+                            v-for="(item, index) of language_buttons_form"
+                            class="bg-color-brand-four rounded w-auto"
+                            :class="{
+                                'ghost color-brand-three': item?.selected}"
+                            :index="index"
+                            @click="$useLanguage(item?.abbreviation), selectAction(index)"
+                        >
+                            {{ item?.label }}
+                        </ButtonBasic>
+                    </div>
                 </div>
                 <h1 class="font-md">{{ $translate('labels.startup.steps.first.title') }}</h1>
                 <p class="o-half font-sm">{{ $translate('labels.startup.steps.first.subTitle') }}</p>
             </div>
 
             <div 
-                class="upper-second-step flex flex-column gap-lg"
+                class="upper-second-step h-full flex flex-column gap-lg"
                 v-else-if="current_step == 1"
             >
+                <div class="step-sticker flex x-center y-center h-full y-start">
+                    <img
+                        class="rounded-lg" 
+                        src="/assets/images/image-ask-sticker.png"
+                    >
+                </div>
                 <h1 class="font-md">{{ $translate('labels.startup.steps.second.title') }}</h1>
                 <p class="o-half font-sm">{{ $translate('labels.startup.steps.second.subTitle') }}</p>   
             </div>
@@ -130,9 +146,18 @@ export default{
 }
 
 .first-step-language-choices{
+
     button{
         padding: 12px 32px 12px 32px;
     }
+}
+
+.step-sticker{
+
+    img{
+        height: 160px;
+}
+
 }
 
 </style>
