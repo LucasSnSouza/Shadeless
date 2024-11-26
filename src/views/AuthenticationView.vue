@@ -57,7 +57,7 @@
 
             <ButtonBasic
                 class="bg-color-brand-three color-brand-one w-full p-lg rounded-md w-auto"
-                @click="type_page_view = 'type_singup'"
+                @click="$router.push({ name: 'Home' })"
             >
                 <p class="font-sm">{{ $translate('labels.authentication.singin_action') }}</p>
             </ButtonBasic>
@@ -69,7 +69,11 @@
             class="authentication-register flex flex-column y-start gap-lg"
         >
 
-            <h1 class="o-3-4 font-lg">{{ $translate('labels.authentication.singup') }}</h1>
+            <h1 
+                style="font-weight: 200"
+                class="o-3-4 font-xlg"
+                v-html="$translate('labels.authentication.register')">
+            </h1>
 
             <InputBasic
                 v-model="form_singin['singup_email']"
@@ -91,6 +95,13 @@
                 placeholder="User name . . ."
                 :value="form_singin['singup_user_name']"
             />
+
+            <ButtonBasic
+                class="bg-color-brand-three color-brand-one w-full p-lg rounded-md w-auto"
+                @click="type_page_view = 'type_singin'"
+            >
+                <p class="font-sm">{{ $translate('labels.authentication.singup_action') }}</p>
+            </ButtonBasic>
 
         </div>
 
@@ -149,6 +160,12 @@ export default{
             margin-top: 60px;
         }
 
+    }
+
+    .authentication-register{
+        h1{
+            margin-top: 60px;
+        }
     }
 
 }

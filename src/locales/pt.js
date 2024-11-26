@@ -18,8 +18,10 @@ export default {
         authentication: {
             singin: "Entrada",
             singin_action: "Entrar",
+            singup_action: "Cadastrar-se",
             singup: "Registra-se",
-            welcome: "Bem vindo <br> de volta <br> ao Shadeless"
+            welcome: "Bem vindo <br> de volta <br> ao Shadeless",
+            register: "Esperamos <br> por você"
         }
     }
 }

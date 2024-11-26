@@ -19,7 +19,9 @@ export default {
             singin: "Singin",
             singup: "Singup",
             singin_action: "Login",
-            welcome: "Welcome <br> of the <br> Shadeless"
+            singup_action: "Register",
+            welcome: "Welcome <br> of the <br> Shadeless",
+            register: "We Wait <br> for you"
         }
     }
 }
