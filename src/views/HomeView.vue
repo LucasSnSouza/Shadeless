@@ -5,6 +5,30 @@
         <div class="home-top-messages h-full scroll-y">
 
             <div
+                v-if="!(form_interaction.length > 0)"
+                class="h-full p-lg flex x-center y-center"
+            >
+                <div>
+                    <h1 class="font-xlg text-center">Como posso te ajudar?</h1>
+                    <p class="font-sm text-center o-half">Abaixo você pode executar comandos de forma rapida.</p>
+                    <div class="flex wrap x-center y-center gap-md">
+                        <ButtonBasic
+                            class="bg-color-brand-one color-brand-two shadow-sm p-lg rounded-lg w-auto"
+                            @click="sendDirectMessageProcessator('mostre seus aplicativos')"
+                        >
+                            <p class="o-3-4 font-sm">Meus aplicativos</p>
+                        </ButtonBasic>
+                        <ButtonBasic
+                            class="bg-color-brand-one color-brand-two shadow-sm p-lg rounded-lg w-auto"
+                            @click="sendDirectMessageProcessator('mostre seus comandos')"
+                        >
+                            <p class="o-3-4 font-sm">Comandos disponiveis</p>
+                        </ButtonBasic>
+                    </div>
+                </div>
+            </div>
+
+            <div
                 v-for="(item, index) of form_interaction"
                 class="p-lg"
                 :key="index"
@@ -19,9 +43,42 @@
                     </div>
                 </div>
 
-                <div class="flex x-start">
-                    <div class="response-message-ballon p-lg">
+                <div class="flex flex-column x-start">
+                    <div 
+                        class="response-message-ballon p-lg"
+                    >
                         {{ item?.response?.message }}
+                    </div>
+                    <div
+                        v-if="item?.response?.images" 
+                        class="response-images-ballon flex p-lg"
+                    >
+                        <div
+                         v-for="(images, index) of item?.response?.images"
+                         class="flex x-center y-center rounded-md overflow-hidden"
+                         :key="index"
+                        >
+                            <img
+                                :src="images?.thumbnail"
+                            >
+                        </div>
+                    </div>
+                    <div
+                        v-if="item?.response?.buttons" 
+                        class="response-images-ballon flex p-lg"
+                    >
+                        <div
+                         v-for="(button, index) of item?.response?.buttons"
+                         class="flex x-center y-center rounded-md overflow-hidden p-md"
+                         :key="index"
+                        >
+                            <ButtonBasic
+                                class="bg-color-brand-one color-brand-two shadow-sm p-lg rounded-lg w-auto"
+                                @click="sendDirectMessageProcessator(button?.command)"
+                            >
+                                <p class="o-3-4 font-sm">{{ button?.title }}</p>
+                            </ButtonBasic>
+                        </div>
                     </div>
                 </div>
             
@@ -74,6 +131,11 @@
 
 <script>
 
+import { setValueRootStorage, getValueRootStorage} from "@/utils/storage";
+import { setInteractProcess, setProcessCommand } from "@/utils/interact";
+import { getSystemAplications } from "@/defaults/defaultsValues";
+
+
 import * as Button from "@/components/Button";
 import * as Input from "@/components/Input";
 import * as Misc from "@/components/Misc";
@@ -96,16 +158,16 @@ export default{
     },
     methods:{
         sendMessageProcessator(){
-            this.form_interaction.push({
-                send: {
-                    message: this.form_screen_data?.search
-                },
-                response: {
-                    message: "Claro, os aplicativos que você está atrelados são."
-                }
-            })
+            this.form_interaction.push(
+                setInteractProcess(this.form_screen_data?.search)
+            )
+        },
+        sendDirectMessageProcessator(value){
+            this.form_interaction.push(
+                setInteractProcess(value)
+            )
         }
-    }
+    },
 }
 
 </script>
@@ -113,6 +175,23 @@ export default{
 <style lang="scss" scoped>
 
 .home-wrapper{
+
+    .home-top-messages{
+
+        padding-top: 60px;
+
+        .response-images-ballon{
+
+            padding-top: 0px;
+
+            img{
+                width: 64px;
+                height: 64px;
+            }
+
+        }
+
+    }
 
     .home-bottom-input{
 
